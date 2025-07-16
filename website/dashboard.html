@@ -1,0 +1,159 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>📚 Order Analytics Dashboard</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                background: #f4f4f4;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            .summary {
+                margin: 20px 0;
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .order-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .order-card {
+                background: white;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                width: calc(33% - 20px);
+                box-sizing: border-box;
+            }
+
+            .order-card h3 {
+                margin: 0 0 10px;
+                font-size: 16px;
+            }
+
+            .order-card ul {
+                padding-left: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>📦 My Book Order Analytics</h1>
+        <div class="summary" id="summary"></div>
+        <div class="order-list" id="orderList"></div>
+
+        <script>
+            // Simulated data, replace this with a fetch('./data.json') call for dynamic data
+            const fetchJSONData = async (filePath) => {
+                try {
+                    const response = await fetch(filePath);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error("Failed to fetch JSON data: ", error);
+                    return null;
+                }
+            }
+            const processData = (data) => {
+                
+            }
+
+            fetchJSONData("../Data/orderInfo.json").then(orders => {
+                function parsePrice(str) {
+                    return parseInt(str.match(/\d+(\.\d+)?/g)) || 0;
+                }
+
+                function renderSummary(orders) {
+                    const totalOrders = orders.length;
+                    let totalBooks = 0; 
+                    let totalSpent = 0;
+
+                    orders.forEach(order => {
+                        order.booksInfo.forEach(book => {
+                            totalSpent += parsePrice(book.price);
+                        });
+                        totalSpent += parsePrice(order["Shipping:"] || "0");
+                        totalBooks += (parseInt(order["Total Items:"]) || 0);
+                    });
+
+                    const summaryEl = document.getElementById('summary');
+                    summaryEl.innerHTML = `
+                        <h2>Summary</h2>
+                        <p><strong>Total Orders:</strong> ${totalOrders}</p>
+                        <p><strong>Total Books:</strong> ${totalBooks}</p>
+                        <p><strong>Total Spent:</strong> ৳ ${totalSpent}</p>
+                    `;
+                }
+
+                function renderOrders(orders) {
+                    const container = document.getElementById('orderList');
+                    orders.forEach(order => {
+                        const div = document.createElement('div');
+                        div.className = 'order-card';
+
+                        const totalBook = order.booksInfo.length;
+                        const booksList = order.booksInfo.map(book =>
+                            `<li>${book.bookName} - ${book.price} (${book.quantity})</li>`
+                        ).join('');
+
+                        div.innerHTML = `
+                            <h3><a href="${order.orderURL}" target="_blank">Order #${order.orderId}</a></h3>
+                            <ul>${booksList}</ul>
+                            <p><strong>Subtotal:</strong> ${order["Sub-Total:"] || "N/A"}</p>
+                            <p><strong>Shipping:</strong> ${order["Shipping:"] || "N/A"}</p>
+                            <p><strong>Number of Books: ${totalBook}</storng></p>
+                        `;
+
+                        container.appendChild(div);
+                    });
+                }
+
+                renderSummary(orders);
+                renderOrders(orders);
+            });
+
+
+        </script>
+    </body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📚 Order Analytics Dashboard</title>
+  <link rel="stylesheet" href="./Css/style.css">
+</head>
+
+<body>
+  <header>
+    <h1>📦 My Book Order Analytics</h1>
+  </header>
+
+  <div class="container">
+    <div class="summary" id="summary">Loading summary...</div>
+    <div class="order-list" id="orderList">Loading orders...</div>
+  </div>
+
+  <script src="./JS/main.js"></script>
+</body>
+</html>
