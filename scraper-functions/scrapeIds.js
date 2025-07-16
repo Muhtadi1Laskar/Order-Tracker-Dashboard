@@ -1,5 +1,4 @@
 import { readJSON, writeJSON } from "../utils/common.js";
-// import orderIds from "../Data/orderIds.json" assert { type: 'json' };
 
 const JSONPath = "C:/Users/laska/OneDrive/Documents/Coding/JavaScript/Rokomari-Stat-Dashboard/Data/orderIds.json";
 
