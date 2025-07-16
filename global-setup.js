@@ -18,6 +18,6 @@ export default async function globalSetup(email, password) {
     await passwordLocator.fill(password);
     await loginBtnLocator.click();
     await page.context().storageState({ path: './storage/storageState.json' });
-    await browser.close();
+    // await browser.close();
 }
 

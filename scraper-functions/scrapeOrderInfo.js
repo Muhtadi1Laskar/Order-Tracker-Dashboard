@@ -8,7 +8,7 @@ const getOrderInfos = async (page, orderIDs, limit = 10) => {
         const data = await extractOrderInfo(page, orderIDs[index]);
         result.push(data);
     }
-    writeJSON(JSONPath, result);
+    await writeJSON(JSONPath, result);
     return result;
 };
 

@@ -4,7 +4,7 @@ import { readJSON, writeJSON } from "../utils/common.js";
 const JSONPath = "C:/Users/laska/OneDrive/Documents/Coding/JavaScript/Rokomari-Stat-Dashboard/Data/orderIds.json";
 
 export const getOrderIds = async (page) => {
-    const orderIds = readJSON(JSONPath);
+    const orderIds = await readJSON(JSONPath);
     console.log(orderIds);
     // if (orderIds.orderIds?.length > 0) {
     //     console.log("📁 Read from saved file");
@@ -36,7 +36,7 @@ export const getOrderIds = async (page) => {
         return [];
     }
 
-    writeJSON(JSONPath, { orderIds: data });
+    await writeJSON(JSONPath, { orderIds: data });
     return data;
 }
 
