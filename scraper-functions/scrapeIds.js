@@ -1,6 +1,11 @@
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import path from "path";
 import { readJSON, writeJSON } from "../utils/common.js";
 
-const JSONPath = "C:/Users/laska/OneDrive/Documents/Coding/JavaScript/Rokomari-Stat-Dashboard/Data/orderIds.json";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const JSONPath = path.join(__dirname, "../Data", "orderIds.json");
 
 export const getOrderIds = async (page) => {
     const orderIds = await readJSON(JSONPath);

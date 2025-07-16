@@ -1,6 +1,10 @@
+import path from "path";
 import { writeJSON } from "../utils/common.js";
+import { fileURLToPath } from "url";
 
-const JSONPath = "C:/Users/laska/OneDrive/Documents/Coding/JavaScript/Rokomari-Stat-Dashboard/Data/orderInfo.json";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const JSONPath = path.join(__dirname, "../Data/", "orderInfo.json")
 
 const getOrderInfos = async (page, orderIDs, limit = 10) => {
     const result = [];
