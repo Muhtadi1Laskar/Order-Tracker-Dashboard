@@ -16,6 +16,7 @@ export const getOrderIds = async (page) => {
 
     const data = [];
 
+    const IDLocator = page.locator("div.my-order-card__meta p em:nth-child(1)");
     const pagerLinks = page.locator("a.pager-link");
     const totalPages = await pagerLinks.count();
 
@@ -27,9 +28,6 @@ export const getOrderIds = async (page) => {
         if (!isNaN(parsed)) lastPage = parsed;
     }
 
-    // const lastPageText = await pagerLinks.nth(totalPages - 2).innerText();
-    // const lastPage = parseInt(lastPageText.trim(), 10);
-    const IDLocator = page.locator("div.my-order-card__meta p em:nth-child(1)");
 
     for (let p = 1; p <= lastPage; p++) {
         await page.goto(`${orderPageURL}?page=${p}`);
