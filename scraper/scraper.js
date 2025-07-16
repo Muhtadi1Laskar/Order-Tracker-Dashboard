@@ -3,8 +3,8 @@ import { getOrderIds } from "../scraper-functions/scrapeIds.js";
 import { getOrderInfos } from "../scraper-functions/scrapeOrderInfo.js";
 import { login } from "../global-setup.js";
 
-const email = "laskar90muhtadi@gmail.com";
-const password = "foundation90";
+const email = "";
+const password = "";
 
 const scraper = async () => {
     const browser = await chromium.launch({ headless: false });
