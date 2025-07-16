@@ -1,11 +1,5 @@
-import { chromium } from '@playwright/test';
-
-const URL = "https://www.rokomari.com/login";
-
-
-export default async function globalSetup(email, password) {
-    const browser = await chromium.launch({ headless: false });
-    const page = await browser.newPage();
+export const login = async (page, email, password) => {
+    const URL = "https://www.rokomari.com/login";
     const emailLocator = page.getByPlaceholder('Email or phone');
     const nextBtnLocator = page.getByRole('button', { name: 'Next' });
     const passwordLocator = page.getByPlaceholder('Password');
@@ -18,6 +12,4 @@ export default async function globalSetup(email, password) {
     await passwordLocator.fill(password);
     await loginBtnLocator.click();
     await page.context().storageState({ path: './storage/storageState.json' });
-    await browser.close();
 }
-
