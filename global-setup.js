@@ -7,7 +7,7 @@ export const login = async (page, email, password) => {
 
     await page.goto(URL);
     await emailLocator.waitFor({ state: "visible" });
-    await emailLocator.fill(email);
+    await emailLocator.type(email);
     await nextBtnLocator.click();
     await passwordLocator.fill(password);
     await loginBtnLocator.click();

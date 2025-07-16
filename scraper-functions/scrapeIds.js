@@ -11,14 +11,24 @@ export const getOrderIds = async (page) => {
 
     const orderPageURL = "https://www.rokomari.com/my-section/orders";
 
+    console.log("🔍 Fetching order IDs from website...");
     await page.goto(orderPageURL);
 
     const data = [];
 
     const pagerLinks = page.locator("a.pager-link");
     const totalPages = await pagerLinks.count();
-    const lastPageText = await pagerLinks.nth(totalPages - 2).innerText();
-    const lastPage = parseInt(lastPageText.trim(), 10);
+
+    let lastPage = 1;
+    if (totalPages > 0) {
+        const index = Math.max(0, totalPages - 2);
+        const lastPageText = await pagerLinks.nth(index).innerText();
+        const parsed = parseInt(lastPageText.trim(), 10);
+        if (!isNaN(parsed)) lastPage = parsed;
+    }
+
+    // const lastPageText = await pagerLinks.nth(totalPages - 2).innerText();
+    // const lastPage = parseInt(lastPageText.trim(), 10);
     const IDLocator = page.locator("div.my-order-card__meta p em:nth-child(1)");
 
     for (let p = 1; p <= lastPage; p++) {
