@@ -5,11 +5,10 @@ const JSONPath = "C:/Users/laska/OneDrive/Documents/Coding/JavaScript/Rokomari-S
 
 export const getOrderIds = async (page) => {
     const orderIds = await readJSON(JSONPath);
-    console.log(orderIds);
-    // if (orderIds.orderIds?.length > 0) {
-    //     console.log("📁 Read from saved file");
-    //     return orderIds.orderIds;
-    // }
+    if (orderIds.orderIds?.length > 0) {
+        console.log("📁 Read from saved file");
+        return orderIds.orderIds;
+    }
 
     const orderPageURL = "https://www.rokomari.com/my-section/orders";
 
