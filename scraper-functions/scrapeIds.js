@@ -1,13 +1,15 @@
-import { writeJSON } from "../utils/common.js";
-import orderIds from "../Data/orderIds.json" assert { type: 'json' };
+import { readJSON, writeJSON } from "../utils/common.js";
+// import orderIds from "../Data/orderIds.json" assert { type: 'json' };
 
 const JSONPath = "C:/Users/laska/OneDrive/Documents/Coding/JavaScript/Rokomari-Stat-Dashboard/Data/orderIds.json";
 
 export const getOrderIds = async (page) => {
-    if (orderIds.orderIds?.length > 0) {
-        console.log("📁 Read from saved file");
-        return orderIds.orderIds;
-    }
+    const orderIds = readJSON(JSONPath);
+    console.log(orderIds);
+    // if (orderIds.orderIds?.length > 0) {
+    //     console.log("📁 Read from saved file");
+    //     return orderIds.orderIds;
+    // }
 
     const orderPageURL = "https://www.rokomari.com/my-section/orders";
 
