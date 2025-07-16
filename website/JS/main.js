@@ -44,14 +44,25 @@ const renderOrders = (orders) => {
         ).join('');
 
         const card = document.createElement('div');
-        card.className = 'order-card';
-        card.innerHTML = `
-          <h3><a href="${order.orderURL}" target="_blank">Order #${order.orderId}</a></h3>
-          <ul>${books}</ul>
-          <p><strong>Subtotal:</strong> ${order["Sub-Total:"] || "N/A"}</p>
-          <p><strong>Shipping:</strong> ${order["Shipping:"] || "N/A"}</p>
-          <p><strong>Number of Books:</strong> ${order.booksInfo.length}</p>
-        `;
+
+
+        if (!order["Sub-Total:"] && !order["Shipping:"]) {
+            card.className = "order-card-cancelled";
+            card.innerHTML += `
+            <ul>${books}</ul>
+                <p><strong>Order Cancelled</strong></p>
+            `;
+        } else {
+            card.className = 'order-card';
+            card.innerHTML = `
+            <h3><a href="${order.orderURL}" target="_blank">Order #${order.orderId}</a></h3>
+            <ul>${books}</ul>
+            <p><strong>Subtotal:</strong> ${order["Sub-Total:"] || "N/A"}</p>
+            <p><strong>Shipping:</strong> ${order["Shipping:"] || "N/A"}</p>
+            <p><strong>Number of Books:</strong> ${order.booksInfo.length}</p>
+            `;
+        }
+
         container.appendChild(card);
     }
 };
